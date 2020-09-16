@@ -1,0 +1,38 @@
+"""
+Created on Wed Sep 16 19:47:07 2020
+
+Rock, Paper, Scissors Game
+Make a rock-paper-scissors game where it is the player vs the computer. 
+The computer’s answer will be randomly generated, while the program will 
+ask the user for their input. This project will better your understanding
+ of while loops and if statements.
+
+@author: Jaya
+"""
+import random
+
+options = ['scissors','paper','rock']
+
+compchoice = random.choice(options)
+print(compchoice)
+
+print("welcome to Scissors,Rock & Paper game")
+
+userchoice = input('please,select the input.scissors,rock or paper: ').lower()
+
+if compchoice == userchoice:
+    print("Tie!!!")
+elif compchoice == options[0] and userchoice == 'paper':
+    print('computer won')
+elif compchoice == options[1] and userchoice == 'rock':
+    print('computer won')
+elif compchoice == options[2] and userchoice == 'scissors':
+    print('computer won')
+elif userchoice == 'scissors' and compchoice == options[1]:
+    print("You won")
+elif userchoice == 'paper' and compchoice == options[2]:
+    print("You won")
+elif userchoice == 'rock' and compchoice == options[0]:
+    print("You won")
+else:
+    print("please select a valid input.")
