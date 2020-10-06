@@ -1,0 +1,77 @@
+"""
+Created on Fri Sep 18 19:49:34 2020
+Create hangman game.
+Six chances will be given to the user.
+@author: Jaya
+"""
+import random 
+import string
+import sys
+
+alpha = string.ascii_letters
+file = open("C:\\Users\\Jaya\\.spyder-py3\\hangman.txt",'r')
+f = list(file.read().splitlines())
+#print(f)
+selection = random.choice(f)
+#print(selection)
+leng = len(selection)
+
+print("Do you want to play Hangman Game?")
+userin = input("select yes or no: ").upper()
+
+if userin == "Y" or userin == "Yes":
+    print("Welcome to the game")
+    print("Guess the word")
+    new_list = "_ "*leng
+    j_list = list("_"*leng)
+    print(new_list)
+    sel = list(selection)
+    print("you will be given 6 chances.")
+         
+    attempt = 0
+    while attempt < 6:
+        if j_list != list(selection):
+            userg = input("guess the letter: ").upper() 
+            if userg in sel:
+                print("correct match")
+                print(userg)
+                index = [i for i,j in enumerate(sel) if j == userg]
+                lindex = len(index)
+                l = new_list.split()
+                for k in index:
+                    l[k] = userg
+                    if userg in selection:  
+                        j_list[k] = userg
+                        print("the user input:","".join(j_list))
+            else:
+                attempt +=1
+                print("match not found.you lost",attempt,"chances")
+                print("chances left:", 6-attempt)
+                if attempt < 6:
+                    userg = input("guess the letter:: ").upper()
+                    if userg in sel:
+                        print("correct match")
+                        print(userg)
+                        index = [i for i,j in enumerate(sel) if j == userg]
+                        lindex = len(index)
+                        l = new_list.split()
+                        for k in index:
+                            l[k] = userg
+                            if userg in selection:  
+                                j_list[k] = userg
+                                print("the user input:","".join(j_list))
+                else:
+                    print("you lost!!!")
+                    sys.exit(0)
+        else:
+            print("match found")
+            print("You Won!!!")
+            sys.exit(0)
+else:
+    print("user doesn't want to play.")
+    print("Goodbye!!!")
+    sys.exit(0)
+
+     
+        
+   
