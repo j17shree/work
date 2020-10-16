@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Oct 16 17:17:53 2020
+# Python3 code to find minimum steps taken by a cuboid at (1,1)to 
+# reach the hole at (6,6) in a chess board
+
+@author: Jaya
+"""
+
+class cell: 
+      
+    def __init__(self, x = 0, y = 0, dist = 0): 
+        self.x = x 
+        self.y = y 
+        self.dist = dist 
+          
+# checks whether the given position is inside the chessboard 
+def isinside(x, y, N): 
+    if (x >= 1 and x <= N and y >= 1 and y <= N):  
+        return True
+    return False
+      
+# Method returns minimum step to reach the target position  
+def minStepToReachTarget(cuboidpos, targetpos, N): 
+      
+    #possible movements for the cuboid 
+    dx = [2, 0, 1, 1]
+    dy = [0, 2, 1, 0]          
+    queue = [] 
+      
+    #starting position of cuboid with 0 distance 
+    queue.append(cell(cuboidpos[0], cuboidpos[1], 0)) 
+      
+    # make all cell unvisited  
+    visited = [[False for i in range(N + 1)]  
+                      for j in range(N + 1)] 
+      
+    # visit starting state 
+    visited[cuboidpos[0]][cuboidpos[1]] = True
+      
+    # loop untill we have one element in queue  
+    while(len(queue) > 0): 
+          
+        t = queue[0] 
+        queue.pop(0) 
+          
+        # if current cell is equal to target cell, return its distance  
+        if(t.x == targetpos[0] and t.y == targetpos[1]): 
+            return t.dist 
+              
+        # iterate for all reachable states for i in range(4): 
+        for i in range(4): 
+              
+            x = t.x + dx[i] 
+            y = t.y + dy[i] 
+              
+            if(isinside(x, y, N) and not visited[x][y]): 
+                visited[x][y] = True
+                queue.append(cell(x, y, t.dist + 1)) 
+
+if __name__=='__main__':  
+    N = 8
+    cuboidpos = [1, 1] 
+    targetpos = [6, 6] 
+    print(minStepToReachTarget(cuboidpos, targetpos, N)) 
+      
